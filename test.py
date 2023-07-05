@@ -34,6 +34,7 @@ def visualize_tree(tree):
     nx.draw_networkx_edges(G, pos, width=6)
 
     # labels
+    labels = {node.id: str(node.id) + '\n' + str(node.prize) for node in nodes}
     nx.draw_networkx_labels(G, pos, font_size=20, font_family='sans-serif')
 
     plt.axis('off')

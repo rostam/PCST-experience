@@ -1,16 +1,24 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
-struct Edge {
+namespace py = pybind11;
+
+class Edge {
+public:
     int node1;
     int node2;
     double cost;
+    Edge(int node1, int node2, double cost) : node1(node1), node2(node2), cost(cost) {}
 };
 
-struct Node {
+class Node {
+public:
     int id;
     double prize;
+    Node(int id, double prize) : id(id), prize(prize) {}
 };
 
 // Function to find the parent of a node in the disjoint set
@@ -79,6 +87,21 @@ double calculatePrize(const std::vector<Edge>& tree, const std::vector<Node>& no
         }
     }
     return prize;
+}
+
+PYBIND11_MODULE(PCST, m) {
+    py::class_<Node>(m, "Node")
+        .def(py::init([](int id, double prize) { return new Node(id, prize); }), py::arg("id"), py::arg("prize"))
+        .def_readwrite("id", &Node::id)
+        .def_readwrite("prize", &Node::prize);
+
+    py::class_<Edge>(m, "Edge")
+        .def(py::init([](int node1, int node2, double cost) { return new Edge(node1, node2, cost); }), py::arg("node1"), py::arg("node2"), py::arg("cost"))
+        .def_readwrite("node1", &Edge::node1)
+        .def_readwrite("node2", &Edge::node2)
+        .def_readwrite("cost", &Edge::cost);
+
+    m.def("kruskalPCST", &kruskalPCST, "A function that solves the PCST problem using a modified Kruskal's algorithm");
 }
 
 void test1() {

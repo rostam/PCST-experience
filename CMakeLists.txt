@@ -1,14 +1,37 @@
-cmake_minimum_required(VERSION 3.15)
-project(PCST-EXPERIENCE)
+cmake_minimum_required(VERSION 3.12)
+project(example)
 
-set(CMAKE_CXX_STANDARD 14)
+# Find Python interpreter, libraries, and headers
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
 
-find_package(pybind11 REQUIRED) 
-# add_subdirectory(extern/pybind11)
+# Find pybind11
+add_subdirectory(extern/pybind11)
+# list(APPEND CMAKE_PREFIX_PATH "extern/pybind11")
+# set(pybind11_DIR "extern/pybind11")
+# find_package(pybind11 REQUIRED)
 
+# Add your source file
+# add_library(example MODULE kruskal_pcst.cpp)
+add_executable(example kruskal_pcst.cpp)
 
-
-add_executable (kruskal_pcst kruskal_pcst.cpp)
-target_link_libraries(kruskal_pcst PRIVATE pybind11::module)
-set_target_properties(kruskal_pcst PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
+# Set properties for the target
+set_target_properties(example PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
                                          SUFFIX "${PYTHON_MODULE_EXTENSION}")
+
+# Link against the Python libraries and pybind11
+# target_link_libraries(example PRIVATE Python::Python pybind11::module)
+
+# Set the C++ standard
+set_target_properties(example PROPERTIES CXX_STANDARD 11)
+
+# Add the Python and pybind11 include directories
+target_include_directories(example PRIVATE ${Python_INCLUDE_DIRS} extern/pybind11/include)
+
+# Add the compile options
+target_compile_options(example PRIVATE -O3 -Wall)
+
+target_link_libraries(example pybind11::headers)
+set_target_properties(example PROPERTIES
+                                INTERPROCEDURAL_OPTIMIZATION ON
+                                CXX_VISIBILITY_PRESET default
+                                VISIBILITY_INLINES_HIDDEN ON)

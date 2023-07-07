@@ -6,3 +6,4 @@
 | Cython     | - Can compile Python code to C, resulting in high performance code<br>- Easier to use than SWIG or Boost.Python for simple tasks | - Requires learning a new language (although it's very similar to Python)<br>- Doesn't support all C++ features |
 | pybind11   | - Easy to use and set up<br>- Supports modern C++ features                                 | - Newer library, might not be as mature or widely supported<br>- Requires a modern C++ compiler         |
 | C++ Server and Python Client | - Language agnostic<br>- Scalable<br>- Separation of concerns | - Additional overhead<br>- Increased complexity<br>- Security concerns |
+| cppyy | - Automatic bindings<br>- Support for modern C++<br>- Support for PyPy and CPython | - Complexity<br>- Dependency on Cling/LLVM |

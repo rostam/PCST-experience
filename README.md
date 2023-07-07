@@ -16,4 +16,5 @@ python test.py
 
 ```
 
-https://dimacs11.zib.de/downloads.html
+A set of test data ofr different graph algorithms like PCST:
+[DIMACS11](https://dimacs11.zib.de/downloads.html)

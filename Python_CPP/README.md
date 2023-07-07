@@ -1,0 +1,8 @@
+| Method     | Pros                                                                                       | Cons                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| ctypes     | - Built-in module in Python<br>- Simple to use for basic use cases                         | - Supports only C functions, not C++<br>- Can be low-level and complex for more advanced use cases      |
+| SWIG       | - Supports a lot of languages, not just Python<br>- Can handle a lot of C++ features       | - Can be complex to set up and use<br>- Generated code can be hard to debug                             |
+| Boost.Python | - Superior level of support for C++ features<br>- More user-friendly than SWIG             | - Large library, can be overkill for simple tasks<br>- Can be complex to set up and use                |
+| Cython     | - Can compile Python code to C, resulting in high performance code<br>- Easier to use than SWIG or Boost.Python for simple tasks | - Requires learning a new language (although it's very similar to Python)<br>- Doesn't support all C++ features |
+| pybind11   | - Easy to use and set up<br>- Supports modern C++ features                                 | - Newer library, might not be as mature or widely supported<br>- Requires a modern C++ compiler         |
+| C++ Server and Python Client | - Language agnostic<br>- Scalable<br>- Separation of concerns | - Additional overhead<br>- Increased complexity<br>- Security concerns |

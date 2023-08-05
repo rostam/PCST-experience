@@ -11,7 +11,7 @@ add_subdirectory(extern/pybind11)
 # find_package(pybind11 REQUIRED)
 
 # Add your source file
-# add_library(example MODULE kruskal_pcst.cpp)
+# add_library(example viMODULE kruskal_pcst.cpp)
 add_executable(example kruskal_pcst.cpp)
 
 # Set properties for the target
@@ -35,3 +35,6 @@ set_target_properties(example PROPERTIES
                                 INTERPROCEDURAL_OPTIMIZATION ON
                                 CXX_VISIBILITY_PRESET default
                                 VISIBILITY_INLINES_HIDDEN ON)
+
+            
+add_test(NAME test1 COMMAND python test.py)

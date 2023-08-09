@@ -16,9 +16,10 @@ git submodule update --init
 
 ### Compiling 
 ```
-g++ -O3 -Wall -shared -std=c++11 -fPIC $(python3-config --includes) -Iextern/pybind11/include kruskal_pcst.cpp -o example$(python3-config --extension-suffix)
+g++ -O3 -Wall -shared -std=c++11 -fPIC $(python3-config --includes) -Iextern/pybind11/include kruskal_pcst.cpp -o PCST$(python3-config --extension-suffix)
 
-python test.py
+python test_kruskal.py
+python test_coloring.py
 ```
 
 ### CMake

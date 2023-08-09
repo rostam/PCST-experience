@@ -102,7 +102,7 @@ std::set<int> getAvailableColors(int node, const std::vector<std::set<int>>& adj
     return neighborColors;
 }
 
-std::vector<int> greedyVertexColoring(const std::vector<Edge>& edges, int numNodes) {
+std::vector<int> greedyVertexColoring(std::vector<Edge>& edges, int numNodes) {
     // Create an adjacency list
     std::vector<std::set<int>> adjacencyList(numNodes);
     for (const auto& edge : edges) {
@@ -168,7 +168,7 @@ void test4() {
     std::vector<Node> nodes = {{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}};
     std::vector<Edge> edges = {{0, 1, 1}, {1, 2, 2}, {2, 3, 3}, {3, 4, 4}};
     std::vector<int> coloring = greedyVertexColoring(edges, nodes.size());
-    // assert(calculateCost(tree) <= 10);
+    assert(coloring.size() <= 2);
     // assert(calculatePrize(tree, nodes) >= 15);
 }
 

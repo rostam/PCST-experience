@@ -35,4 +35,4 @@ jobs:
         make
 
     - name: Run tests
-      run: python test.py
+      run: python test_kruskal.py

@@ -3,6 +3,7 @@
 #include <cassert>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <set>
 
 namespace py = pybind11;
 
@@ -89,6 +90,40 @@ double calculatePrize(const std::vector<Edge>& tree, const std::vector<Node>& no
     return prize;
 }
 
+
+std::set<int> getAvailableColors(int node, const std::vector<std::set<int>>& adjacencyList, const std::vector<int>& colors) {
+    std::set<int> neighborColors;
+    for (int neighbor : adjacencyList[node]) {
+        if (colors[neighbor] != -1) {
+            neighborColors.insert(colors[neighbor]);
+        }
+    }
+
+    return neighborColors;
+}
+
+std::vector<int> greedyVertexColoring(const std::vector<Edge>& edges, int numNodes) {
+    // Create an adjacency list
+    std::vector<std::set<int>> adjacencyList(numNodes);
+    for (const auto& edge : edges) {
+        adjacencyList[edge.node1].insert(edge.node2);
+        adjacencyList[edge.node2].insert(edge.node1);
+    }
+
+    std::vector<int> colors(numNodes, -1); // -1 indicates no color assigned
+
+    for (int i = 0; i < numNodes; i++) {
+        std::set<int> unavailableColors = getAvailableColors(i, adjacencyList, colors);
+        int color = 0;
+        while (unavailableColors.find(color) != unavailableColors.end()) {
+            color++;
+        }
+        colors[i] = color;
+    }
+
+    return colors;
+}
+
 PYBIND11_MODULE(PCST, m) {
     py::class_<Node>(m, "Node")
         .def(py::init([](int id, double prize) { return new Node(id, prize); }), py::arg("id"), py::arg("prize"))
@@ -102,6 +137,7 @@ PYBIND11_MODULE(PCST, m) {
         .def_readwrite("cost", &Edge::cost);
 
     m.def("kruskalPCST", &kruskalPCST, "A function that solves the PCST problem using a modified Kruskal's algorithm");
+    m.def("greedyVertexColoring", &greedyVertexColoring, "A function that colors the vertices using a greedy algorithm");
 }
 
 void test1() {

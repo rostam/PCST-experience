@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+
 using namespace std;
 
 // This class represents a undirected graph using adjacency list

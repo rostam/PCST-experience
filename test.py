@@ -75,7 +75,6 @@ edges = [
 ]
 
 tree = PCST.kruskalPCST(nodes, edges)
-std::vector<int> coloring = PCST::get_coloring(tree, nodes.size());
 
 # print(tree)
 visualize_graph(nodes, edges)

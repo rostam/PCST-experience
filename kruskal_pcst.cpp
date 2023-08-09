@@ -164,9 +164,19 @@ void test3() {
     assert(calculatePrize(tree, nodes) >= 15);
 }
 
+void test4() {
+    std::vector<Node> nodes = {{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}};
+    std::vector<Edge> edges = {{0, 1, 1}, {1, 2, 2}, {2, 3, 3}, {3, 4, 4}};
+    std::vector<int> coloring = greedyVertexColoring(edges, nodes.size());
+    // assert(calculateCost(tree) <= 10);
+    // assert(calculatePrize(tree, nodes) >= 15);
+}
+
+
 int main() {
     test1();
     test2();
     test3();
+    test4();
     return 0;
 }

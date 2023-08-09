@@ -30,5 +30,11 @@ make test
 ```
 
 ### Test
+
+#### Testing if the function is in the object
+nm example.cpython-310-x86_64-linux-gnu.so | grep kruskal
+nm example.cpython-310-x86_64-linux-gnu.so | grep greedy
+
+#### Larger Test Data
 A set of test data ofr different graph algorithms like PCST:
 [DIMACS11](https://dimacs11.zib.de/downloads.html)
